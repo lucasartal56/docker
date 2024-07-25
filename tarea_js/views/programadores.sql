@@ -18,3 +18,4 @@ CREATE TABLE programadores (
     pro_situacion SMALLINT DEFAULT 1
     
 );
+

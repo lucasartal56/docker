@@ -10,9 +10,11 @@ btnModificar.parentElement.style.display = 'none'
 btnCancelar.parentElement.style.display = 'none'
 
 const getProductos = async () => {
-    const nombre = formulario.producto_nombre.value
-    const precio = formulario.producto_precio.value
-    const url = `/crud-js-22072024/controllers/productos/index.php?producto_nombre=${nombre}&producto_precio=${precio}`
+    const nombre = formulario.cliente_nombre.value
+    const apellido = formulario.cliente_apellido.value
+    const nit = formulario.cliente_nit.value
+    const telefono = formulario.cliente_telefono.value
+    const url = `/crud-js-22072024-main/controllers/clientes/index.php?cliente_nombre=${nombre}&cliente_apellido=${apellido}&cliente_nit=${nit}&cliente_telefono=${telefono}`
     const config = {
         method: 'GET'
     }
@@ -41,19 +43,23 @@ const getProductos = async () => {
             }).fire();
 
             if (data.length > 0) {
-                data.forEach(producto => {
+                data.forEach(cliente => {
                     const tr = document.createElement('tr')
                     const celda1 = document.createElement('td')
                     const celda2 = document.createElement('td')
                     const celda3 = document.createElement('td')
                     const celda4 = document.createElement('td')
                     const celda5 = document.createElement('td')
+                    const celda6 = document.createElement('td')
+                    const celda7 = document.createElement('td')
                     const buttonModificar = document.createElement('button')
                     const buttonEliminar = document.createElement('button')
 
                     celda1.innerText = contador;
-                    celda2.innerText = producto.producto_nombre;
-                    celda3.innerText = producto.producto_precio;
+                    celda2.innerText = cliente.cliente_nombre;
+                    celda3.innerText = cliente.cliente_apellido;
+                    celda4.innerText = cliente.cliente_nit;
+                    celda5.innerText = cliente.cliente_telefono;
 
 
                     buttonModificar.textContent = 'Modificar'
@@ -62,14 +68,16 @@ const getProductos = async () => {
                     buttonEliminar.textContent = 'Eliminar'
                     buttonEliminar.classList.add('btn', 'btn-danger', 'w-100')
 
-                    celda4.appendChild(buttonModificar)
-                    celda5.appendChild(buttonEliminar)
+                    celda6.appendChild(buttonModificar)
+                    celda7.appendChild(buttonEliminar)
 
                     tr.appendChild(celda1)
                     tr.appendChild(celda2)
                     tr.appendChild(celda3)
                     tr.appendChild(celda4)
                     tr.appendChild(celda5)
+                    tr.appendChild(celda6)
+                    tr.appendChild(celda7)
                     fragment.appendChild(tr);
 
                     contador++
@@ -78,7 +86,7 @@ const getProductos = async () => {
             } else {
                 const tr = document.createElement('tr')
                 const td = document.createElement('td')
-                td.innerText = 'No hay productos disponibles'
+                td.innerText = 'No hay clientes disponibles'
                 td.colSpan = 5;
 
                 tr.appendChild(td)
@@ -88,23 +96,22 @@ const getProductos = async () => {
             console.log('hola');
         }
 
-        tablaProductos.tBodies[0].appendChild(fragment)
+        tablaClientes.tBodies[0].appendChild(fragment)
     } catch (error) {
         console.log(error);
     }
 }
 
-getProductos();
+getClientes();
 
 
-const guardarProducto = async (e) => {
+const guardarCliente = async (e) => {
     e.preventDefault();
     btnGuardar.disabled = true;
-
-    const url = '/crud-js-22072024/controllers/productos/index.php'
+    const url = '/crud-js-22072024/controllers/clientes/index.php'
     const formData = new FormData(formulario)
     formData.append('tipo', 1)
-    formData.delete('producto_id')
+    formData.delete('cliente_id')
     const config = {
         method: 'POST',
         body: formData
@@ -130,7 +137,7 @@ const guardarProducto = async (e) => {
         // alert(mensaje)
         // console.log(data);
         if (codigo == 1 && respuesta.status == 200) {
-            getProductos();
+            getClientes();
             formulario.reset();
         } else {
             console.log(detalle);
@@ -144,5 +151,5 @@ const guardarProducto = async (e) => {
 
 
 
-formulario.addEventListener('submit', guardarProducto)
-btnBuscar.addEventListener('click', getProductos)
+formulario.addEventListener('submit', guardarCliente)
+btnBuscar.addEventListener('click', getClientes)

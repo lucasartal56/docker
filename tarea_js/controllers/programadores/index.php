@@ -1,44 +1,59 @@
 <?php
-require '../../models/Producto.php';
+require '../../models/Programador.php';
 header('Content-Type: application/json; charset=UTF-8');
 
 $metodo = $_SERVER['REQUEST_METHOD'];
 $tipo = $_REQUEST['tipo'];
 
-// echo json_encode($_GET);
+// echo json_encode($_POST);
 // exit;
 try {
     switch ($metodo) {
         case 'POST':
-            $producto = new Producto($_POST);
+            $programador = new Programador($_POST);
             switch ($tipo) {
                 case '1':
 
-                    $ejecucion = $producto->guardar();
-                    $mensaje = "Guardado correctamente";
+                    $ejecucion = $programador->guardar();
+                    $mensaje = "Guardado Satisfactoriamente";
+                    break;
+
+                case '2':
+
+                    $ejecucion = $programador->modificar();
+                    $mensaje = "Modificado Satisfactoriamente";
+                    break;
+
+                case '3':
+
+                    $ejecucion = $programador->eliminar();
+                    $mensaje = "Eliminado Satisfactoriamente";
                     break;
 
                 default:
 
                     break;
             }
+            
             http_response_code(200);
             echo json_encode([
                 "mensaje" => $mensaje,
                 "codigo" => 1,
+
             ]);
             break;
+
         case 'GET':
             http_response_code(200);
-            $producto = new Producto($_GET);
-            $productos = $producto->buscar();
-            echo json_encode($productos);
+            $programador = new Programador($_GET);
+            $programadores = $programador->buscar();
+            echo json_encode($programadores);
             break;
 
         default:
             http_response_code(405);
             echo json_encode([
-                "mensaje" => "Método no permitido",
+                "mensaje" => "Método inválido",
                 "codigo" => 9,
             ]);
             break;

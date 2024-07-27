@@ -31,7 +31,8 @@ class Tarea extends Conexion
 
     public function buscar()
     {
-        $sql = "SELECT * from tareas where ta_situacion = 1 ";  
+        $sql = "SELECT tareas.*, aplicaciones.* FROM tareas INNER JOIN aplicaciones ON tareas.ta_aplicacion = aplicaciones.ap_id
+                WHERE tareas.ta_situacion = 1";  
 
         if ($this->ta_nombre != '') {
             $sql .= " and ta_nombre like '%$this->ta_nombre%' ";

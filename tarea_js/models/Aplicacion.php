@@ -46,8 +46,7 @@ class Aplicacion extends Conexion
         return $resultado;
     }
 
-    public function mostrarAplicaciones()
-    {
+    public function mostrarAplicaciones(){
         $sql = "SELECT * FROM Aplicaciones where ap_situacion = 1";
         $resultado = self::servir($sql);
         return $resultado;

@@ -63,7 +63,7 @@ const getTareas = async (alerta='si') => {
                     celda1.innerText = contador;
                     celda2.innerText = tarea.ta_nombre;
                     celda3.innerText = tarea.ta_fecha;
-                    celda4.innerText = tarea.ta_aplicacion;
+                    celda4.innerText = tarea.ap_nombre;
 
 
                     buttonModificar.textContent = 'Modificar'
@@ -143,8 +143,8 @@ const guardarTarea = async (e) => {
         // alert(mensaje)
 
         if (codigo == 1 && respuesta.status == 200) {
-            getTareas(alerta ='no');
             formulario.reset();
+            getTareas(alerta ='no');
         } else {
             console.log(detalle);
         }

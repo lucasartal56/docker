@@ -14,9 +14,10 @@ class Aplicacion extends Conexion
         $this->ap_id = $args['ap_id'] ?? null;
         $this->ap_nombre = $args['ap_nombre'] ?? '';
         $this->ap_descripcion = $args['ap_descripcion'] ?? '';
-        $this->ap_situacion = $args['ap_situacion'] ?? '';
-
+        $this->ap_situacion = $args['ap_situacion'] ?? NULL ;
     }
+
+    
 
     public function guardar()
     {
@@ -45,6 +46,13 @@ class Aplicacion extends Conexion
         return $resultado;
     }
 
+    public function mostrarAplicaciones()
+    {
+        $sql = "SELECT * FROM Aplicaciones where ap_situacion = 1";
+        $resultado = self::servir($sql);
+        return $resultado;
+
+    }
     public function modificar()
     {
          $sql = "UPDATE aplicaciones SET  ap_nombre = '$this->ap_nombre', ap_descripcion = '$this->ap_descripcion' where ap_id = '$this->ap_id'";
@@ -53,11 +61,12 @@ class Aplicacion extends Conexion
          return $resultado;
     }
 
+
     public function eliminar()
     {
         $sql = "UPDATE aplicaciones SET ap_situacion = 0 where ap_id = '$this->ap_id'";
 
      $resultado = self::ejecutar($sql);
      return $resultado;
- }
+    }
 }

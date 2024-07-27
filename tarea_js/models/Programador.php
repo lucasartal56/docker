@@ -63,6 +63,13 @@ class Programador extends Conexion
         return $resultado;
     }
 
+    public function mostrarProgramadores(){
+        $sql = "SELECT * FROM Programadores where pro_situacion = 1";
+        $resultado = self::servir($sql);
+        return $resultado;
+
+    }
+
     public function modificar()
     {
          $sql = "UPDATE programadores SET  pro_grado = '$this->pro_grado', pro_arma = '$this->pro_arma', pro_nombre = '$this->pro_nombre', pro_apellido = '$this->pro_apellido', pro_catalogo = '$this->pro_catalogo' where pro_id = '$this->pro_id'";

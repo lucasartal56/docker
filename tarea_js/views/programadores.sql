@@ -24,3 +24,15 @@ CREATE TABLE tareas (
     PRIMARY KEY (ta_id),
     FOREIGN KEY (ta_aplicacion) REFERENCES aplicaciones (ap_id)
 );
+
+CREATE TABLE asignaciones (
+    as_id SERIAL NOT NULL,
+    as_pro_id INTEGER NOT NULL,
+    as_ap_id INTEGER NOT NULL,
+    as_situacion SMALLINT DEFAULT 1,
+    PRIMARY KEY (as_id),
+    FOREIGN KEY (as_pro_id) REFERENCES programadores (pro_id),
+    FOREIGN KEY (as_ap_id) REFERENCES aplicaciones (ap_id)
+);
+
+

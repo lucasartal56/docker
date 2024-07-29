@@ -16,6 +16,7 @@
                     <ul class="dropdown-menu bg-dark">
                         <li class="nav-item">
                             <a class="nav-link" href="">Clientes</a>
+                            <a class="nav-link" href="">Productos</a>
                         </li>
                     </ul>
                 </li>
